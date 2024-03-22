@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dashboard - RJ Professional</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./css/components.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="./assets/logo/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./assets/logo/favicon-16x16.png">
+        <link rel="manifest" href="./assets/logo/site.webmanifest">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet" >
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+        <style>
+            a{
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body onload="checkLogin()">
+        <!-- NAV -->
+        <nav class="nav_menu">
+            <div class="navigation" id="navigation">
+                <a href="./Dashboard.html"><i class="fas fa-home"></i><span class="reshide">Home</span></a>
+            </div>
+            <div class="head">
+                <a href="./Dashboard.html"><img src="./assets/main-logo.webp" class="main-logo" alt="" srcset=""></a>
+            </div>
+            <div class="profile">
+                <a href="#" id="logName"></a>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </nav>
+        <!-- End NAV -->
+        <section class="menu">
+            <h1>Services</h1>
+        <div class="row">
+            <a href="bill.html">
+            <div class="menu-col">
+                <h3>Bill</h3>
+                <p>Add Customer bill</p>
+            </div>
+            </a>
+            <a href="tally.html">
+            <div class="menu-col">
+                <h3>Tally</h3>
+                <p>Click here to Generate Bill</p>
+            </div>
+            </a>
+            <a href="inventory.html">
+            <div class="menu-col">
+                <h3>Inventory</h3>
+                <p>Add/remove stock items</p>
+            </div>
+            </a>
+            <a href="add.html">
+            <div class="menu-col">
+                <h3>Add/Remove</h3>
+                <p>Click to manage workers</p>
+            </div>
+            </a>
+            <a href="block.html" >
+            <div class="menu-col">
+                <h3>Block/Unblock</h3>
+                <p>Worker's login permission</p>
+            </div>
+            </a>
+            <a href="Reminder.html" >
+            <div class="menu-col">
+                <h3>Reminder</h3>
+                <p>Send reminders</p>
+            </div>
+            </a>
+        </div>
+        </section>
+	<script src="./js/functions.js"></script>
+    <script>
+        checkLogin() 
+    </script>
+</body>
+</html>

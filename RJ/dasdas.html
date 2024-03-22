@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RJ Professional Login Form</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+  	<link rel="stylesheet" href="./style.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="./assets/logo/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./assets/logo/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./assets/logo/favicon-16x16.png">
+	<link rel="manifest" href="./assets/logo/site.webmanifest">
+</head>
+<body>
+	<div class="rj">
+		<h1>RJ Professional</h1>
+	</div>
+	<div class="center">
+		<h1>Login</h1>
+		<form onsubmit="event.preventDefault(); login();">
+			<div class="txt_field">
+				<input type="text" id="user" required>
+				<span></span>
+				<label>Username or Email</label>
+			</div>
+			<div class="txt_field">
+				<input type="password" id="pass" required>
+				<span></span>
+				<label>Password</label>	
+			</div>
+			<div>
+				<input type="submit" id="btnLogin" value="Login">
+			</div>
+		</form>
+	</div>
+	<div class="power">
+		<p>Powered By &copy; SoftwareZone</p>
+	</div>
+
+	<script src="./js/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="./js/functions.js"></script>
+
+	<script>
+		savedLogin()
+		function login(){
+			var user = document.getElementById('user').value
+			var pass = document.getElementById('pass').value
+
+			const checkData = {
+				'user': user,
+				'pass': pass
+			}
+
+			if(user == '' || pass == ''){
+				Swal.fire({
+					icon: 'warning',
+					title: 'Empty Fields',
+					text: 'You must have left some field unfilled!',
+				})
+			}else{
+				$.ajax({
+					type: 'post',
+					url: './handlers/login.php',
+					data: checkData, 
+					success: function (responce) {
+						var res = responce.split('-');
+						// 0 = No account found
+						// 1 = Query error
+						// 2 = admin
+						// 3 = user 
+						// 4 = No permission
+						var result = res[0];
+						var nm = res[1];
+						var id = res[2];
+
+						console.log(responce);
+
+						if(result == '1') {
+							Swal.fire(
+								'Server Error!',
+								'There was some problem from server side!',
+								'error'
+							)
+						} else if(result == '2') {
+							Swal.fire(
+								`Welcome ${nm}`,
+								'',
+								'success'
+							).then((result) => {
+								localStorage.setItem('loggedUserID', id)
+								localStorage.setItem('loggedUserNm', nm)
+    							localStorage.setItem('loggedUserType', 'a')
+								window.location = './Dashboard.html'
+							});
+						} else if(result == '3'){
+							Swal.fire(
+								`Welcome ${nm}`,
+								'',
+								'success'
+							).then((result) => {
+								localStorage.setItem('loggedUserID', id)
+								localStorage.setItem('loggedUserNm', nm)
+    							localStorage.setItem('loggedUserType', 'u')
+								window.location = './bill.html'
+							});
+						} else if(result == '4') {
+							Swal.fire(
+								"You don't have permission to login!",
+								'Please contact your manager',
+								'warning'
+							)
+						} else{
+							Swal.fire(
+								'No account found!',
+								'Check username or password!',
+								'error'
+							)
+						}
+					}, 
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log(textStatus, errorThrown);
+					}
+				});
+			}
+		}
+	</script>
+</body>
+</html>

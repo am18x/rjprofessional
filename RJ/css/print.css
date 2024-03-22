@@ -1,0 +1,1 @@
+@media print{@page{size:landscape}}.flexjustify,.navigation,.profile{display:none!important}.nav_menu{justify-content:center}@page:left{@bottom-left{content:"Page " counter(page) " of " counter(pages)}}
